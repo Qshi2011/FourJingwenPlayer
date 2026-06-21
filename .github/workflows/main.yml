@@ -1,0 +1,35 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: 17
+
+    - name: Grant execute permission
+      run: chmod +x gradlew || true
+
+    - name: Build APK
+      run: |
+        echo "Project uploaded successfully."
+        echo "This repository still requires a Gradle wrapper and full Android SDK configuration."
+
+    - name: Upload Files
+      uses: actions/upload-artifact@v4
+      with:
+        name: FourJingwenPlayer-source
+        path: .
